@@ -40,7 +40,7 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('welcome') }}">Home</a>
                             <ul class="sub_menu">
                                 <li><a href="index.html">Homepage V1</a></li>
                                 <li><a href="home-02.html">Homepage V2</a></li>
@@ -49,7 +49,7 @@
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="{{ route('products.index') }}">Shop</a>
                         </li>
 
                         <li class="sale-noti">
@@ -340,13 +340,3 @@
         </nav>
     </div>
 </header>
-
-<!-- Title Page -->
-<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(images/heading.jpg);">
-    <h2 class="l-text2 t-center">
-        Women
-    </h2>
-    <p class="m-text13 t-center">
-        New Arrivals Women Collection 2018
-    </p>
-</section>

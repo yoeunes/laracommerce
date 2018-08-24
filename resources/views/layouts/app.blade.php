@@ -8,9 +8,19 @@
 <body class="animsition">
     <div id="app">
 
-        @include('partials/top/_nav')
+        <nav>
+            @include('partials/top/_nav')
+        </nav>
 
-        <main class="py-4">
+        <section>
+            @yield('slider')
+        </section>
+
+        <section>
+            @yield('banner')
+        </section>
+
+        <main>
             @yield('content')
         </main>
 
