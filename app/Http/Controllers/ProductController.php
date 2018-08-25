@@ -48,7 +48,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $relatedProducts = Product::relatedProducts('slug', $product->slug);
+
+        return view('products.show', compact('product', 'relatedProducts'));
     }
 
     /**

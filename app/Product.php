@@ -8,15 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     /**
-     * Bootstrap the application Product service.
+     * Get the route key for the model.
      *
-     * @return void
+     * @return string
      */
-    protected static function boot()
+    public function getRouteKeyName()
     {
-        parent::boot();
-
-        static::observe(ProductObserver::class);
+        return 'slug';
     }
 
     /**
@@ -32,5 +30,16 @@ class Product extends Model
         $price_formatted = number_format($price, 2);
 
         return $price_formatted;
+    }
+
+    /**
+     * Scope a query to only include related products.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeRelatedProducts($query, $attribute, $value, $number=8)
+    {
+        return $query->inRandomOrder()->get()->whereNotIn($attribute, $value)->take($number);
     }
 }

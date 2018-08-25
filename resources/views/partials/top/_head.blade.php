@@ -28,5 +28,6 @@
 <!-- Custom Styles For This Template-->
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/css/util.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/css/main.css') }}">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
 @yield('links')
