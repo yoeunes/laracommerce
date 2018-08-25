@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Cart;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -14,7 +16,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('carts.index');
+        //
     }
 
     /**
@@ -33,9 +35,16 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $item = Cart::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'qty' => $request->quantity,
+        ]);
+
+        return back();
     }
 
     /**
@@ -44,9 +53,9 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('carts.show');
     }
 
     /**
