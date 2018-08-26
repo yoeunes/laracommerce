@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/fonts/elegant-font/html-css/style.css') }}">
 
 <!-- Custom Styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/vendor/animate/animate.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/vendor/css-hamburgers/hamburgers.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/fashe-colorlib/vendor/animsition/css/animsition.min.css') }}">

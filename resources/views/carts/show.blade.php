@@ -4,6 +4,7 @@
 
 
 @section('content')
+
     <!-- Title Page -->
     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading.jpg);">
         <h2 class="l-text2 t-center">
@@ -22,10 +23,11 @@
 
                             <tr class="table-head">
                                 <th class="column-1"></th>
-                                <th class="column-2">Product</th>
-                                <th class="column-3">Price</th>
-                                <th class="column-4 p-l-70">Quantity</th>
-                                <th class="column-5">Total</th>
+                                <th class="column-2">Image</th>
+                                <th class="column-3">Product</th>
+                                <th class="column-4">Price</th>
+                                <th class="column-5">Quantity</th>
+                                <th class="column-6 pr-5">Subtotal</th>
                             </tr>
 
                             @each ('carts.html._item', Cart::content(), 'item')
@@ -133,8 +135,29 @@
                     </div>
                 </div>
             @else
+
                 Your cart is empty!
+
+                <a href="{{ route('products.index') }}" class="btn btn-default ml-3 rounded-full py-2 px-4 bg-black text-white">
+                    Continue shopping
+                </a>
+
             @endif
         </div>
     </section>
+@endsection
+
+@section('scripts')
+    <script>
+
+        $('.btn-removecart-product').each(function(){
+
+            // var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+            var nameProduct = $(this).parent().parent().parent().find('.product-name a').html();
+
+            $(this).on('click', function(){
+                swal(nameProduct, "is removed from cart !", "success");
+            });
+        });
+    </script>
 @endsection

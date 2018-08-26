@@ -3,9 +3,10 @@
 namespace App;
 
 use App\Observers\ProductObserver;
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends Model implements Buyable
 {
     /**
      * Get the route key for the model.
@@ -41,5 +42,17 @@ class Product extends Model
     public function scopeRelatedProducts($query, $attribute, $value, $number=8)
     {
         return $query->inRandomOrder()->get()->whereNotIn($attribute, $value)->take($number);
+    }
+
+    public function getBuyableIdentifier($options = null){
+        return $this->id;
+    }
+
+    public function getBuyableDescription($options = null){
+        return $this->name;
+    }
+
+    public function getBuyablePrice($options = null){
+        return $this->price;
     }
 }

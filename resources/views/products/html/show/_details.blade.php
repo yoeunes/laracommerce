@@ -7,7 +7,7 @@
 
     <!-- Price -->
     <span class="m-text17">
-        ${{ $product->price }}
+        {{ $product->price }}
     </span>
 
     <p class="s-text8 p-t-10">
@@ -15,6 +15,8 @@
     </p>
 
     <form action="{{ route('carts.store', $product) }}" method="POST">
+
+        @csrf
 
         <div class="p-t-33 p-b-60">
 
