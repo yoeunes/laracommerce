@@ -7,16 +7,12 @@
 
     <!-- Price -->
     <span class="m-text17">
-        {{ $product->price }}
+        {{ $product->presentPrice }}
     </span>
 
     <p class="s-text8 p-t-10">
         Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
     </p>
-
-    <form action="{{ route('carts.store', $product) }}" method="POST">
-
-        @csrf
 
         <div class="p-t-33 p-b-60">
 
@@ -57,31 +53,34 @@
             <div class="flex-r-m flex-w p-t-10">
                 <div class="w-size16 flex-m flex-w">
 
-                    <!-- Quantity -->
-                    <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
-                        <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                            <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-                        </button>
+                    <form action="{{ route('carts.store', $product) }}" method="POST">
 
-                        <input class="size8 m-text18 t-center num-product" type="number" name="quantity" value="1">
+                        @csrf
 
-                        <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                            <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-                        </button>
-                    </div>
+                        <!-- Quantity -->
+                        <div class="flex-w bo5 of-hidden m-r-22 m-t-10 m-b-10">
+                            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                                <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                            </button>
 
-                    <!-- Button -->
-                    <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                            Add to Cart
-                        </button>
-                    </div>
+                            <input class="size8 m-text18 t-center num-product" type="number" name="quantity" id="quantity" value="1">
 
+                            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="btn-addcart-product-detail size9 trans-0-4 m-t-10 m-b-10">
+                            <button type="submit" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                Add to Cart
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
-
-    </form>
 
     <!-- Categories -->
     <div class="p-b-45">

@@ -34,6 +34,20 @@ class Product extends Model implements Buyable
     }
 
     /**
+     * Set the product price and currency.
+     *
+     * @return string
+     */
+    public function getPresentPriceAttribute()
+    {
+        $price = $this->price;
+
+        $currency = config('app.currency');
+
+        return $currency.$price;
+    }
+
+    /**
      * Scope a query to only include related products.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -54,5 +68,12 @@ class Product extends Model implements Buyable
 
     public function getBuyablePrice($options = null){
         return $this->price;
+    }
+
+    public static function findBy($value, $attribute='slug')
+    {
+        $product = static::where($attribute, $value)->firstOrFail();
+
+        return $product;
     }
 }

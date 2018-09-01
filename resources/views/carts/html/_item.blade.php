@@ -13,6 +13,16 @@
                 </button>
             </div>
         </form>
+
+        <form action="{{ route('carts.switchtowishlist', $item->rowId) }}" method="POST">
+            @csrf
+
+            <div class="btn-removecart-product">
+                <button type="submit">
+                    <span class="lnr lnr-heart text-red"></span>
+                </button>
+            </div>
+        </form>
     </td>
     <td class="column-2">
         <div class="cart-img-product b-rad-4 o-f-hidden">
@@ -27,7 +37,7 @@
         </p>
         <p class="text-xs mt-2">{{ $product->description }}</p>
     </td>
-    <td class="column-4">${{ $item->price }}</td>
+    <td class="column-4">${{ number_format( $item->price, 2 ) }}</td>
     <td class="column-5">
         <div class="flex-w bo5 of-hidden w-size17">
             <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
@@ -41,5 +51,5 @@
             </button>
         </div>
     </td>
-    <td class="column-6s">$36.00</td>
+    <td class="column-6s">{{ config('app.currency') }}{{ number_format($item->price * $item->qty, 2) }}</td>
 </tr>

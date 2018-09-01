@@ -2,7 +2,6 @@
 
 @section('title', 'My Cart')
 
-
 @section('content')
 
     <!-- Title Page -->
@@ -30,7 +29,7 @@
                                 <th class="column-6 pr-5">Subtotal</th>
                             </tr>
 
-                            @each ('carts.html._item', Cart::content(), 'item')
+                            @each ('carts.html._item', $cartItems, 'item')
 
                         </table>
                     </div>
@@ -64,14 +63,25 @@
                         Cart Totals
                     </h5>
 
-                    <!--  -->
+                    <!-- Subtotal -->
                     <div class="flex-w flex-sb-m p-b-12">
                         <span class="s-text18 w-size19 w-full-sm">
                             Subtotal:
                         </span>
 
                         <span class="m-text21 w-size20 w-full-sm">
-                            $39.00
+                            ${{ Cart::subtotal() }}
+                        </span>
+                    </div>
+
+                    <!-- Tax -->
+                    <div class="flex-w flex-sb-m p-b-12">
+                        <span class="s-text18 w-size19 w-full-sm">
+                            Tax ({{ config('cart.tax').'%' }}):
+                        </span>
+
+                        <span class="m-text21 w-size20 w-full-sm">
+                            ${{ Cart::tax() }}
                         </span>
                     </div>
 
@@ -123,7 +133,7 @@
                         </span>
 
                         <span class="m-text21 w-size20 w-full-sm">
-                            $39.00
+                            ${{ Cart::total() }}
                         </span>
                     </div>
 

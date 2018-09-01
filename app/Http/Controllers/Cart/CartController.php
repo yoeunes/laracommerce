@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Traits\Cart\HasProduct;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    use HasProduct;
+
     /**
      * Display a listing of the resource.
      *
@@ -33,25 +36,31 @@ class CartController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Product $product)
     {
-        // Associate cart item with the model
-        $cartItem = Cart::add($product, $request->quantity);
+        if($this->itemIsNotInTheCart($product, config('constants.wishcart')))
+        {
+            $this->addToCart($product, 'default', $request->quantity);
 
-        return back();
+            return back();
+        }
+
+        return redirect()->route('carts.show');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        return view('carts.show');
+        $cartItems = $this->getCartContent();
+
+        return view('carts.show', compact('cartItems'));
     }
 
     /**
@@ -81,13 +90,34 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $rowId
      * @return \Illuminate\Http\Response
      */
     public function destroy($rowId)
     {
-        Cart::remove($rowId);
+        $this->removeFromCart($rowId);
 
         return back();
+    }
+
+    /**
+     * Move the product from the cart to the wish list.
+     *
+     * @param int $rowId
+     * @return  \Illuminate\Http\Response
+     */
+    public function switchToWishList($rowId)
+    {
+        $item = $this->getCartItem($rowId);
+        $product = Product::find($item->id);
+
+        $this->removeFromCart($rowId);
+
+        if($this->addToCart($product, config('constants.wishcart')) )
+        {
+            return back();
+        }
+
+        return redirect()->route('wishlist.show');
     }
 }
