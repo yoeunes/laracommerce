@@ -89,4 +89,15 @@ trait HasProduct
     {
         return Cart::instance($cartName)->get($rowId);
     }
+
+    /**
+     * Rempve all items from the cart.
+     *
+     * @param  string $cartName
+     * @return void
+     */
+    protected function emptyCart($cartName=NULL)
+    {
+        Cart::instance($cartName)->destroy();
+    }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <!-- Title Page -->
+    <!-- Page Title-->
     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(images/heading.jpg);">
         <h2 class="l-text2 t-center">
             Cart
@@ -50,11 +50,15 @@
                     </div>
 
                     <!-- Button -->
-                    <div class="size10 trans-0-4 m-t-10 m-b-10">
-                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-                            Update Cart
-                        </button>
-                    </div>
+                    <form action="{{ route('carts.empty') }}" method="POST">
+                        <div class="size10 trans-0-4 m-t-10 m-b-10">
+                            @csrf
+                            @method('DELETE')
+                            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                                Empty Cart
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Total -->
@@ -69,7 +73,7 @@
                             Subtotal:
                         </span>
 
-                        <span class="m-text21 w-size20 w-full-sm">
+                        <span class="m-text21 w-size20 w-full-sm" id="subtotal">
                             ${{ Cart::subtotal() }}
                         </span>
                     </div>
@@ -160,6 +164,12 @@
 @section('scripts')
     <script>
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('.btn-removecart-product').each(function(){
 
             // var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -169,5 +179,30 @@
                 swal(nameProduct, "is removed from cart !", "success");
             });
         });
+
+        var qtys = $("input[name*=quantity]");
+
+        $.each(qtys, function(index, el) {
+
+            $(this).on('change', function() {
+
+                var quantity = el.value;
+                var rowid = el.getAttribute('data-id');
+                var updateCartUrl = '/my-cart/' + rowid;
+
+                $.ajax({
+                    url: updateCartUrl,
+                    type: "PUT",
+                    data: {
+                        quantity: quantity
+                    },
+                    success: function(response)
+                    {
+                        window.location.href = "{{ route('carts.show') }}"
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection

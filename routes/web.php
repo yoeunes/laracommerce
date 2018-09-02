@@ -14,8 +14,8 @@ Route::namespace('Cart')->prefix('my-cart')->as('carts.')->group(function(){
     Route::post('/{product}', 'CartController@store')->name('store');
     Route::delete('/{rowId}', 'CartController@destroy')->name('destroy');
     Route::post('/switchToWishList/{rowId}', 'CartController@switchToWishList')->name('switchtowishlist');
-    // Route::put('/{rowId}', 'CartController@update')->name('update');
-    // Route::delete('/', 'CartController@empty')->name('empty');
+    Route::put('/{rowId}', 'CartController@update')->name('update');
+    Route::delete('/', 'CartController@empty')->name('empty');
 });
 
 Route::namespace('Cart')->prefix('my-wish-list')->as('wishlist.')->group(function(){
@@ -23,4 +23,5 @@ Route::namespace('Cart')->prefix('my-wish-list')->as('wishlist.')->group(functio
     Route::post('/{product}', 'WishListController@store')->name('store');
     Route::delete('/{rowId}', 'WishListController@destroy')->name('destroy');
     Route::post('/switch-to-cart/{rowId}', 'WishListController@switchToCart')->name('switchtocart');
+    Route::delete('/', 'WishListController@empty')->name('empty');
 });

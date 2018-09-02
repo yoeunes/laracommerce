@@ -78,6 +78,17 @@ class WishListController extends Controller
         }
 
         return redirect()->route('carts.show');
+    }
 
+    /**
+     * Empty cart.
+     *
+     * @return  \Illuminate\Http\Response
+     */
+    public function empty()
+    {
+        $this->emptyCart(config('constants.wishcart'));
+
+        return back();
     }
 }

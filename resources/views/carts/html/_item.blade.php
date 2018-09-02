@@ -4,6 +4,7 @@
 <tr class="table-row">
     <td class="column-1">
         <form action="{{ route('carts.destroy', $item->rowId) }}" method="POST">
+
             @csrf
             @method('DELETE')
 
@@ -37,19 +38,14 @@
         </p>
         <p class="text-xs mt-2">{{ $product->description }}</p>
     </td>
-    <td class="column-4">${{ number_format( $item->price, 2 ) }}</td>
+    <td class="column-4">
+        {{ config('app.currency') }}{{ number_format( $item->price, 2 ) }}
+    </td>
     <td class="column-5">
-        <div class="flex-w bo5 of-hidden w-size17">
-            <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
-                <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
-            </button>
-
-            <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="{{ $item->qty }}">
-
-            <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
-                <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
-            </button>
-        </div>
+        <input type="text" class="border border-grey text-center w-12" style="padding-top: 7px !important; padding-bottom: 6px !important" name="quantity" id="quantity" value="{{ $item->qty }}"  data-id="{{ $item->rowId }}" />
+        <button class="update-qty-btn">
+            <i class="fa fa-refresh bg-black text-white px-2 py-2"></i>
+        </button>
     </td>
     <td class="column-6s">{{ config('app.currency') }}{{ number_format($item->price * $item->qty, 2) }}</td>
 </tr>

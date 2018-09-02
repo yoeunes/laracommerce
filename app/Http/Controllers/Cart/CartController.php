@@ -81,9 +81,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rowId)
     {
-        //
+        Cart::update($rowId, $request->quantity);
+
+        return response([
+            'success' => true
+        ]);
     }
 
 
@@ -119,5 +123,17 @@ class CartController extends Controller
         }
 
         return redirect()->route('wishlist.show');
+    }
+
+    /**
+     * Empty cart.
+     *
+     * @return  \Illuminate\Http\Response
+     */
+    public function empty()
+    {
+        $this->emptyCart();
+
+        return back();
     }
 }
