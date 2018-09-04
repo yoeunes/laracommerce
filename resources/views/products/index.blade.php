@@ -9,10 +9,10 @@
 @section('content')
     <section class="bgwhite p-t-55 p-b-65">
         <div class="container">
-            <div class="row">
 
+            <div class="row">
                 <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-                    @include('partials.side._leftbar')
+                    @include('products.html.index._sidebar')
                 </div>
 
                 <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
@@ -22,7 +22,11 @@
 
                     <!-- Product -->
                     <div class="row">
-                        @each ('products.partials.html._product', $products, 'product')
+                        @if ($products->count())
+                            @each ('products.partials.html._product', $products, 'product')
+                        @else
+                            No products in this category at present.
+                        @endif
                     </div>
 
                     <!-- Pagination -->

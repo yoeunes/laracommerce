@@ -33,7 +33,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Services/Helpers/methods.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

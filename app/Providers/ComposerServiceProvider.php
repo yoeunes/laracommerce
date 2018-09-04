@@ -2,13 +2,11 @@
 
 namespace App\Providers;
 
-use App\Category;
-use App\Observers\CategoryObserver;
-use App\Observers\ProductObserver;
-use App\Product;
+use App\ViewComposers\ProductFiltersComposer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class ObserverServiceProvider extends ServiceProvider
+class ComposerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -17,8 +15,7 @@ class ObserverServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Product::observe(\App\Observers\ProductObserver::class);
-        Category::observe(\App\Observers\CategoryObserver::class);
+        View::composer('products.html.index._sidebar', ProductFiltersComposer::class);
     }
 
     /**

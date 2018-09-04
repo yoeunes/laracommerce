@@ -1,66 +1,56 @@
 <div class="leftbar p-r-20 p-r-0-sm">
-    <!--  -->
-    <h4 class="m-text14 p-b-7">
-        Categories
-    </h4>
 
+
+    <!-- Categories -->
+    {{-- <h4 class="m-text14 p-b-7">
+        Category
+    </h4>
     <ul class="p-b-54">
         <li class="p-t-4">
-            <a href="#" class="s-text13 active1">
+            <a href="{{ route('products.index') }}" class="s-text13 active1">
                 All
             </a>
         </li>
+        @foreach ($categories as $category)
+            <li class="p-t-4">
+                <a href="{{ route('products.index', ['category' => $category->slug]) }}" class="s-text13">
+                    {{ $category->formatted_name }}
+                </a>
+            </li>
+        @endforeach
+    </ul> --}}
 
+    <!-- Price -->
+    {{-- <h4 class="m-text14">
+        Price
+    </h4>
+    <ul class="p-b-54">
         <li class="p-t-4">
-            <a href="#" class="s-text13">
-                Women
+            <a href="{{ route('products.index', ['category' => request()->category, 'price' => 'low_high']) }}" class="s-text13 active1">
+                Low to high
             </a>
         </li>
-
         <li class="p-t-4">
-            <a href="#" class="s-text13">
-                Men
-            </a>
-        </li>
-
-        <li class="p-t-4">
-            <a href="#" class="s-text13">
-                Kids
-            </a>
-        </li>
-
-        <li class="p-t-4">
-            <a href="#" class="s-text13">
-                Accesories
+            <a href="{{ route('products.index', ['category' => request()->category, 'price' => 'high_low']) }}" class="s-text13 active1">
+                High to low
             </a>
         </li>
     </ul>
+ --}}
+    <div class="wra-filter-bar">
+        <div id="filter-bar"></div>
+    </div>
 
-    <!--  -->
-    <h4 class="m-text14 p-b-32">
-        Filters
-    </h4>
-
-    <div class="filter-price p-t-22 p-b-50 bo3">
-        <div class="m-text15 p-b-17">
-            Price
+    <div class="flex-sb-m flex-w p-t-16">
+        <div class="w-size11">
+            <!-- Button -->
+            <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
+                Filter
+            </button>
         </div>
 
-        <div class="wra-filter-bar">
-            <div id="filter-bar"></div>
-        </div>
-
-        <div class="flex-sb-m flex-w p-t-16">
-            <div class="w-size11">
-                <!-- Button -->
-                <button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
-                    Filter
-                </button>
-            </div>
-
-            <div class="s-text3 p-t-10 p-b-10">
-                Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-            </div>
+        <div class="s-text3 p-t-10 p-b-10">
+            Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
         </div>
     </div>
 

@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
      *
      * @var array
      */
-    protected $tables = [ 'products'];
+    protected $tables = [ 'products', 'categories'];
 
     /**
      * Seed the application's database.
@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         // $this->call(UsersTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
     }
 

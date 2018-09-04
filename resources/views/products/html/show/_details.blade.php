@@ -85,7 +85,12 @@
     <!-- Categories -->
     <div class="p-b-45">
         <span class="s-text8 m-r-35">SKU: MUG-01</span>
-        <span class="s-text8">Categories: Mug, Design</span>
+        <span class="s-text8">
+            Categories:
+            @foreach ($product->categories as $category)
+                {{ $category->name }}
+            @endforeach
+        </span>
     </div>
 
     <!-- Description -->

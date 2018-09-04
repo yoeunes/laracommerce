@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model implements Buyable
 {
+
     /**
      * Get the route key for the model.
      *
@@ -16,6 +17,11 @@ class Product extends Model implements Buyable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     /**
@@ -75,5 +81,16 @@ class Product extends Model implements Buyable
         $product = static::where($attribute, $value)->firstOrFail();
 
         return $product;
+    }
+
+    /**
+     * Scope a query to only include filtered products.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeFilter($query, $filters)
+    {
+        return $filters->apply($query);  //App\Filters\Filters.php - apply(Builder $builder);
     }
 }
